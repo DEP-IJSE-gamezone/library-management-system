@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/bookstore")
+@CrossOrigin(origins = "http://localhost:4200")
 public class BookRestController {
 
     private BookService bookService;
@@ -26,14 +27,14 @@ public class BookRestController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PatchMapping("/{regnu}")
+    @PatchMapping(value = "/{regnu}",consumes = "application/json" )
     public void updateBook(@RequestBody BookDTO bookDto, @PathVariable String regnu) {
         bookDto.setRegNumber(regnu);
         bookService.updateBook(bookDto);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{regnu}")
+    @DeleteMapping(value = "/{regnu}",consumes = "application/json")
     public void removeBook(@PathVariable String regnu) {
         bookService.deleteBook(regnu);
     }
